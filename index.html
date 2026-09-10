@@ -26,7 +26,10 @@
     .search:focus-within{border-color:rgba(242,112,89,0.45);box-shadow:var(--shadow-glow)}
     .search input{width:100%;border:0;outline:0;background:transparent;font-family:var(--font-sans);font-size:20px;font-weight:300;letter-spacing:-0.01em;color:var(--navy)}
     .search input::placeholder{color:var(--ink-400);font-weight:300}
-    .addbtn{transition:transform 160ms cubic-bezier(0.23,1,0.32,1),background 160ms cubic-bezier(0.23,1,0.32,1)}
+    .addbtn{transition:width 260ms cubic-bezier(0.23,1,0.32,1),padding 260ms cubic-bezier(0.23,1,0.32,1),border-radius 260ms cubic-bezier(0.23,1,0.32,1),transform 160ms cubic-bezier(0.23,1,0.32,1),background 160ms cubic-bezier(0.23,1,0.32,1)}
+    .addbtn{width:52px;padding:0;white-space:nowrap;overflow:hidden;border-radius:50%}
+    .addbtn[data-active="1"]{width:196px;border-radius:26px;padding:0 24px}
+    .addbtn-txt{transition:opacity 140ms ease}
     .addbtn:hover{background:var(--coral-deep)}
     .addbtn:active{transform:scale(0.97)}
 
@@ -74,7 +77,7 @@
 
     <div class="search" style="display:flex;align-items:center;gap:18px;background:var(--white);border:1px solid var(--ink-100);border-radius:var(--radius-pill);box-shadow:var(--shadow-md);padding:10px 10px 10px 30px;margin-bottom:22px">
       <input type="text" placeholder="What are you working on?" />
-      <button class="addbtn" style="flex-shrink:0;width:52px;height:52px;border:0;border-radius:50%;background:var(--coral);color:#fff;font-size:28px;font-weight:300;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center">+</button>
+      <button class="addbtn" id="searchBtn" style="flex-shrink:0;height:52px;border:0;background:var(--coral);color:#fff;font-size:28px;font-weight:300;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><span class="addbtn-txt">+</span></button>
     </div>
 
     <div ref="{{ setFilters }}" style="margin-bottom:34px">
@@ -321,6 +324,28 @@ class Component extends DCLogic {
     grid.addEventListener('pointerleave', () => { lastCell = null; });
   }
 }
+</script>
+<script>
+(function(){
+  var input = document.querySelector('.search input');
+  var btn = document.getElementById('searchBtn');
+  if(!input||!btn) return;
+  var txt = btn.querySelector('.addbtn-txt');
+  var isActive = false;
+  input.addEventListener('input', function(){
+    var active = input.value.trim().length > 0;
+    if(active === isActive) return;
+    isActive = active;
+    txt.style.opacity = '0';
+    setTimeout(function(){
+      txt.textContent = active ? 'Find your agent' : '+';
+      txt.style.fontSize = active ? '15px' : '28px';
+      txt.style.fontWeight = active ? '500' : '300';
+      btn.setAttribute('data-active', active ? '1' : '0');
+      txt.style.opacity = '1';
+    }, 130);
+  });
+})();
 </script>
 </body>
 </html>
