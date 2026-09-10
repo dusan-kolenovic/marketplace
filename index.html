@@ -26,10 +26,10 @@
     .search:focus-within{border-color:rgba(242,112,89,0.45);box-shadow:var(--shadow-glow)}
     .search input{width:100%;border:0;outline:0;background:transparent;font-family:var(--font-sans);font-size:20px;font-weight:300;letter-spacing:-0.01em;color:var(--navy)}
     .search input::placeholder{color:var(--ink-400);font-weight:300}
-    .addbtn{transition:width 260ms cubic-bezier(0.23,1,0.32,1),padding 260ms cubic-bezier(0.23,1,0.32,1),border-radius 260ms cubic-bezier(0.23,1,0.32,1),transform 160ms cubic-bezier(0.23,1,0.32,1),background 160ms cubic-bezier(0.23,1,0.32,1)}
+    .addbtn{transition:width 520ms cubic-bezier(0.23,1,0.32,1),padding 520ms cubic-bezier(0.23,1,0.32,1),border-radius 520ms cubic-bezier(0.23,1,0.32,1),transform 160ms cubic-bezier(0.23,1,0.32,1),background 160ms cubic-bezier(0.23,1,0.32,1)}
     .addbtn{width:52px;padding:0;white-space:nowrap;overflow:hidden;border-radius:50%}
     .addbtn[data-active="1"]{width:196px;border-radius:26px;padding:0 24px}
-    .addbtn-txt{transition:opacity 140ms ease}
+    .addbtn-txt{transition:opacity 260ms ease}
     .addbtn:hover{background:var(--coral-deep)}
     .addbtn:active{transform:scale(0.97)}
 
@@ -330,15 +330,8 @@ class Component extends DCLogic {
   // delegated on document: survives the React remount that replaces
   // the search bar's DOM nodes after this script first runs
   var lastActive = null;
-  document.addEventListener('input', function(e){
-    if(!e.target.matches('.search input')) return;
-    var btn = document.getElementById('searchBtn');
-    if(!btn) return;
-    var txt = btn.querySelector('.addbtn-txt');
-    if(!txt) return;
-    var active = e.target.value.trim().length > 0;
-    if(active === lastActive) return;
-    lastActive = active;
+  var debounce = null;
+  function morph(active, txt, btn){
     txt.style.opacity = '0';
     setTimeout(function(){
       txt.textContent = active ? 'Find your agent' : '+';
@@ -346,7 +339,28 @@ class Component extends DCLogic {
       txt.style.fontWeight = active ? '500' : '300';
       btn.setAttribute('data-active', active ? '1' : '0');
       txt.style.opacity = '1';
-    }, 130);
+    }, 220);
+  }
+  document.addEventListener('input', function(e){
+    if(!e.target.matches('.search input')) return;
+    var btn = document.getElementById('searchBtn');
+    if(!btn) return;
+    var txt = btn.querySelector('.addbtn-txt');
+    if(!txt) return;
+    var hasText = e.target.value.trim().length > 0;
+    clearTimeout(debounce);
+    if(!hasText){
+      // clearing the field reverts right away
+      if(lastActive !== false){ lastActive = false; morph(false, txt, btn); }
+      return;
+    }
+    // wait for a pause in typing before morphing, so it doesn't
+    // interrupt mid-keystroke
+    debounce = setTimeout(function(){
+      if(lastActive === true) return;
+      lastActive = true;
+      morph(true, txt, btn);
+    }, 500);
   }, true);
 })();
 </script>
