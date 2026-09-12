@@ -66,13 +66,13 @@
 
       <!-- FEATURED (2x2) -->
       <div data-cell style="grid-column:span 2;grid-row:span 2;transform-origin:50% 82%;will-change:transform">
-        <div class="card" style="height:100%;background:var(--white);border:1px solid var(--ink-100);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);cursor:pointer;overflow:hidden;display:flex;flex-direction:column;transition:transform 260ms var(--ease-calm),box-shadow 260ms var(--ease-calm),border-color 260ms var(--ease-calm)" style-hover="transform:translateY(-5px);box-shadow:0 22px 54px rgba(30,42,58,0.15);border-color:rgba(242,112,89,0.4)">
-          <div style="height:5px;background:var(--gradient-strip);flex-shrink:0"></div>
-          <div style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;flex:1;min-height:0">
-            <div style="display:flex;align-items:center;gap:9px"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral)"></span><span style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">Agent · Development · Discovery</span></div>
-            <h2 style="margin:0;font-size:28px;font-weight:300;letter-spacing:-0.015em;color:var(--navy);line-height:1.08">Explore the company harness</h2>
-            <p style="margin:0;font-size:15px;line-height:1.55;color:var(--ink-600);flex:1">See what's already built — and what you can hand off next. Ask it anything about the codebase, and get your hours back for the work only you can do.</p>
-            <div style="height:1px;background:var(--ink-100)"></div>
+        <div class="card" style="height:100%;position:relative;background:var(--gradient-warm);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);cursor:pointer;overflow:hidden;display:flex;flex-direction:column;transition:transform 260ms var(--ease-calm),box-shadow 260ms var(--ease-calm)" style-hover="transform:translateY(-5px);box-shadow:var(--shadow-glow)">
+          <div style="position:absolute;inset:0;background-image:var(--grain);background-size:120px;pointer-events:none"></div>
+          <div style="position:relative;padding:26px 28px;display:flex;flex-direction:column;gap:14px;flex:1;min-height:0">
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:8px;height:8px;border-radius:50%;background:var(--light-900)"></span><span style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--light-700)">Agent · Development · Discovery</span></div>
+            <h2 style="margin:0;font-size:28px;font-weight:300;letter-spacing:-0.015em;color:var(--light-900);line-height:1.08">Explore the company harness</h2>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:var(--light-700);flex:1">Ask it anything about the codebase. Get your hours back.</p>
+            <div style="height:1px;background:var(--light-200)"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
               <div style="display:flex;align-items:center;gap:11px">
                 <div style="display:flex">
@@ -80,9 +80,9 @@
                   <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--white);margin-left:-10px" />
                   <img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--white);margin-left:-10px" />
                 </div>
-                <span style="font-size:13px;color:var(--ink-500)"><span style="font-weight:600;color:var(--navy)">1,248</span> use this</span>
+                <span style="font-size:13px;color:var(--light-700)"><span style="font-weight:600;color:var(--light-900)">1,248</span> use this</span>
               </div>
-              <span style="font-size:12px;color:var(--ink-500);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal)"></span>Active</span>
+              <span style="font-size:12px;color:var(--light-700);display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--light-900)"></span>Active</span>
             </div>
           </div>
         </div>
@@ -90,11 +90,10 @@
 
       <!-- BUILD -->
       <div data-cell style="transform-origin:50% 82%;will-change:transform">
-        <div class="card" style="height:100%;position:relative;border-radius:var(--radius-xl);box-shadow:var(--shadow-md);cursor:pointer;overflow:hidden;background:var(--gradient-warm);transition:transform 260ms var(--ease-calm),box-shadow 260ms var(--ease-calm)" style-hover="transform:translateY(-5px);box-shadow:var(--shadow-glow)">
-          <div style="position:absolute;inset:0;background-image:var(--grain);background-size:120px"></div>
-          <div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
-            <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:300;line-height:1">+</div>
-            <div style="font-size:14px;font-weight:600;color:#fff">Build your own</div>
+        <div class="card" style="height:100%;background:var(--white);border:1px solid var(--ink-100);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);cursor:pointer;overflow:hidden;transition:transform 260ms var(--ease-calm),box-shadow 260ms var(--ease-calm),border-color 260ms var(--ease-calm)" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px rgba(30,42,58,0.13);border-color:rgba(30,42,58,0.14)">
+          <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+            <div style="width:40px;height:40px;border-radius:50%;background:transparent;border:1px solid var(--ink-200);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:24px;font-weight:300;line-height:1">+</div>
+            <div style="font-size:14px;font-weight:600;color:var(--navy)">Build your own</div>
           </div>
         </div>
       </div>
