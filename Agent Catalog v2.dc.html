@@ -47,11 +47,12 @@
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:28px;flex-wrap:wrap">
       <div>
         <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:14px">Catalog</div>
-        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents &amp; automations</h1>
+        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents, automations &amp; skills</h1>
       </div>
       <div style="display:flex;align-items:center;gap:22px">
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Agent</span></div>
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Automation</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--lavender);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Skill</span></div>
       </div>
     </div>
 
@@ -118,7 +119,8 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;rippleStrength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4,&quot;min&quot;:0,&quot;max&quot;:22,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Ripple&quot;},&quot;rippleReach&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:160,&quot;min&quot;:150,&quot;max&quot;:500,&quot;step&quot;:10,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Ripple&quot;}}">
 class Component extends DCLogic {
   renderVals() {
-    const A = 'var(--coral)', T = 'var(--teal)';
+    const A = 'var(--coral)', T = 'var(--teal)', S = 'var(--lavender)';
+    const DOT = { a: A, t: T, s: S };
     const P = (g, n) => `https://randomuser.me/api/portraits/${g}/${n}.jpg`;
     const raw = [
       ['Inbox triage','a', P('men',45)],   ['Review replies','a', P('women',68)],
@@ -132,9 +134,10 @@ class Component extends DCLogic {
       ['Shift swaps','t', P('men',40)],    ['Lead replies','a', P('women',63)],
       ['Payroll prep','t', P('men',60)],   ['Birthday notes','t', P('women',81)],
       ['Late reply nudges','a', P('men',77)], ['Bookkeeping tidy','t', P('women',48)],
+      ['Proposal writer','s', P('women',5)], ['Board deck builder','s', P('men',48)],
     ];
     return {
-      items: raw.map(([name, k, img]) => ({ name, img, dot: k === 'a' ? A : T })),
+      items: raw.map(([name, k, img]) => ({ name, img, dot: DOT[k] || A })),
       setGrid: (el) => { if (el && el !== this._grid) { this._grid = el; this._attach(el); } },
     };
   }

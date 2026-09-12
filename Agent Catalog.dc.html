@@ -37,11 +37,12 @@
     <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:44px;flex-wrap:wrap">
       <div>
         <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:14px">Catalog</div>
-        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents &amp; automations</h1>
+        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents, automations &amp; skills</h1>
       </div>
       <div style="display:flex;align-items:center;gap:22px">
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Agent</span></div>
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Automation</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--lavender);display:inline-block"></span><span style="font-size:13px;color:var(--ink-600)">Skill</span></div>
       </div>
     </header>
 
@@ -99,7 +100,8 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;rippleStrength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:10,&quot;min&quot;:0,&quot;max&quot;:22,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Ripple&quot;},&quot;rippleReach&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:300,&quot;min&quot;:150,&quot;max&quot;:500,&quot;step&quot;:10,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Ripple&quot;}}">
 class Component extends DCLogic {
   renderVals() {
-    const A = 'var(--coral)', T = 'var(--teal)';
+    const A = 'var(--coral)', T = 'var(--teal)', S = 'var(--lavender)';
+    const DOT = { a: A, t: T, s: S };
     const raw = [
       ['Inbox triage','a'],['Review replies','a'],['Appointment reminders','t'],
       ['Weekly numbers','t'],['Restock alerts','t'],['New-client welcome','a'],
@@ -108,10 +110,10 @@ class Component extends DCLogic {
       ['Waitlist fills','t'],['Contract renewals','t'],['Deposit reminders','t'],
       ['Feedback digest','a'],['Shift swaps','t'],['Lead replies','a'],
       ['Payroll prep','t'],['Birthday notes','t'],['Late reply nudges','a'],
-      ['Bookkeeping tidy','t'],
+      ['Bookkeeping tidy','t'],['Proposal writer','s'],['Board deck builder','s'],
     ];
     return {
-      items: raw.map(([name, k]) => ({ name, dot: k === 'a' ? A : T })),
+      items: raw.map(([name, k]) => ({ name, dot: DOT[k] || A })),
       setGrid: (el) => { if (el && el !== this._grid) { this._grid = el; this._attach(el); } },
     };
   }

@@ -67,11 +67,12 @@
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:28px;flex-wrap:wrap">
       <div>
         <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:14px">Catalog</div>
-        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents &amp; automations</h1>
+        <h1 style="margin:0;font-size:46px;font-weight:300;letter-spacing:-0.025em;line-height:1.02;color:var(--navy)">HireRight&#39;s agents, automations &amp; skills</h1>
       </div>
       <div style="display:flex;align-items:center;gap:22px">
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span><span style="font-size:13px;color:var(--ink-700)">Agent</span></div>
         <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block"></span><span style="font-size:13px;color:var(--ink-700)">Automation</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--lavender);display:inline-block"></span><span style="font-size:13px;color:var(--ink-700)">Skill</span></div>
       </div>
     </div>
 
@@ -162,16 +163,21 @@ const DEPTS = [
 
 const P = (g, n) => `https://randomuser.me/api/portraits/${g}/${n}.jpg`;
 
-// [name, kind(a=agent/t=automation), photo, department, sub-facet]
+// [name, kind(a=agent/t=automation/s=skill), photo, department, sub-facet]
 const RAW = [
   ['Ticket intake','t',P('men',22),'development','Product'],
   ['Requirement gaps','a',P('men',9),'development','Product'],
   ['Questions for product','a',P('men',68),'development','Product'],
   ['Context gathering','a',P('women',48),'development','Product'],
+  ['PRD writer','s',P('women',15),'development','Product'],
 
   ['Design handoff','a',P('women',65),'development','Design'],
   ['Screenshot tidy','t',P('men',40),'development','Design'],
   ['UI verification','a',P('women',26),'development','Design'],
+  ['Brand voice','s',P('women',52),'development','Design'],
+
+  ['Frontend design','s',P('men',13),'development','Build'],
+  ['Excel wrangling','s',P('women',38),'development','Build'],
 
   ['Root cause analysis','a',P('men',77),'development','Plan'],
   ['Implementation plans','a',P('men',52),'development','Plan'],
@@ -196,6 +202,7 @@ const RAW = [
   ['Waitlist fills','t',P('men',94),'sales','Leads'],
   ['Quote drafts','a',P('women',90),'sales','Quotes'],
   ['Price lookups','t',P('men',3),'sales','Quotes'],
+  ['Proposal writer','s',P('women',5),'sales','Quotes'],
   ['New-client welcome','a',P('women',33),'sales','Follow-ups'],
   ['Appointment reminders','t',P('men',51),'sales','Follow-ups'],
   ['Order updates','t',P('women',21),'sales','Follow-ups'],
@@ -203,6 +210,7 @@ const RAW = [
 
   ['Blog drafts','a',P('women',68),'marketing','Content'],
   ['Newsletter prep','t',P('men',60),'marketing','Content'],
+  ['SEO copywriting','s',P('women',24),'marketing','Content'],
   ['Social scheduler','t',P('women',81),'marketing','Social'],
   ['Campaign recaps','t',P('men',85),'marketing','Campaigns'],
   ['Review replies','a',P('women',55),'marketing','Reviews'],
@@ -210,6 +218,7 @@ const RAW = [
 
   ['Candidate replies','a',P('men',75),'hr','Hiring'],
   ['Interview scheduling','t',P('women',12),'hr','Hiring'],
+  ['JD writer','s',P('men',41),'hr','Hiring'],
   ['Onboarding buddy','t',P('women',44),'hr','Onboarding'],
   ['First-week checklist','t',P('men',18),'hr','Onboarding'],
   ['Shift swaps','t',P('men',36),'hr','Scheduling'],
@@ -220,6 +229,7 @@ const RAW = [
   ['Expense sorting','t',P('women',16),'finance','Expenses'],
   ['Receipt matching','t',P('men',29),'finance','Expenses'],
   ['Weekly numbers','t',P('women',28),'finance','Reporting'],
+  ['Board deck builder','s',P('men',48),'finance','Reporting'],
   ['Restock alerts','t',P('men',64),'finance','Suppliers'],
   ['Supplier check-ins','a',P('women',57),'finance','Suppliers'],
 ];
@@ -229,11 +239,12 @@ class Component extends DCLogic {
 
   renderVals() {
     const { dept, sub } = this.state;
-    const A = 'var(--coral)', T = 'var(--teal)';
+    const A = 'var(--coral)', T = 'var(--teal)', S = 'var(--lavender)';
+    const DOT = { a: A, t: T, s: S };
 
     const items = RAW
       .filter(([, , , d, s]) => (dept === 'all' || d === dept) && (!sub || s === sub))
-      .map(([name, k, img]) => ({ name, img, dot: k === 'a' ? A : T }));
+      .map(([name, k, img]) => ({ name, img, dot: DOT[k] || A }));
 
     const depts = DEPTS.map(([id, label]) => ({
       label,
